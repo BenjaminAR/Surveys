@@ -1,0 +1,61 @@
+<!-- survey_modal.html -->
+
+<style>
+    p {
+        color: rgb(12, 12, 12);
+    }
+
+    span {
+        color: rgb(188, 4, 4);
+    }
+</style>
+
+<p style="text-align: center; font-weight: bold;">Orden: {{ encuesta.numero_orden }}</p>
+<p>Fecha: <span>{{ encuesta.fecha }}</span></p>
+<p>¿El cliente vivió toda la experiencia de servicio?: <span>{{ encuesta.vivio_experiencia_completa_texto }}</span> </p>
+<p>Tipo de servicio que se realizó a su vehículo: <br><span>{{ encuesta.tipo_servicio }} </span></p>
+<p>De 0 a 10 recomendó a la agencia: <span>{{ encuesta.recomendar_mitsubishi }}</span></p>
+<p>Razon(es) por las que ha decidido calificar su recomendación: <br> <span style="margin-top: 1rem;"> {{ encuesta.razones_recomendacion }} </span></p>
+<!--Servicio-->
+<h5>Servicio</h5>
+<p>Vehículo entregado en tiempo pometido: <span>{{ encuesta.vehiculo_entregado_prometido_texto }}</span></p>
+<p>¿El costo final coincide con el presupuesto?: <span>{{ encuesta.costo_final_coincide_presupuesto }}</span></p>
+<p>Explicación sobre las reparaciones: <span>{{ encuesta.explicacion_reparaciones_texto }}</span></p>
+<p>¿El vehículo se entrego limpio?: <span>{{ encuesta.limpieza_vehiculo_texto }}</span></p>
+<p>Del 0 al 10 calificación general de la entrega: <span>{{ encuesta.calificacion_entrega_general }}</span></p>
+<h5>Asesor</h5>
+<p>Tiempo de espera del asesor para la entrega: <span>{{ encuesta.tiempo_espera_asesor }}</span></p>
+<p>Acciones realizadas por el asesor: <span id="texto_punto_salto"><br>{{ encuesta.acciones_asesor }}</span></p>
+<p>Del 0 al 10 calificación al asesor: <span>{{ encuesta.calificacion_atencion_asesor }}</span></p>
+<h5>Instalaciones</h5>
+<p>Ofrecieron cortesias durante la estadía?: <span>{{ encuesta.ofrecieron_cortesias_texto }}</span></p>
+<p>Del 0 al 10 Calificación a las instalaciones: <span>{{ encuesta.calificacion_instalaciones }}</span></p>
+<h5>Entrega</h5>
+<p>¿Como programo la cita? <br> <span>{{ encuesta.programacion_cita }}</span></p>
+<p>Del 0 al 10 calificación al programar una cita: <span>{{ encuesta.calificacion_programacion_cita }}</span></p>
+<p>Agendó cita el dia/horario deseado: <span>{{ encuesta.obtener_cita_deseada_texto }}</span></p>
+<br>
+<p style="font-weight: bold; text-align: center;">Calificación general al área de servicio: <span>{{ encuesta.calificacion_servicio_general }}</span></p>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+        console.log('Hola mundo')
+        // Obtener el elemento span
+        const textoSpan = document.getElementById('texto_punto_salto');
+
+        // Obtener el texto dentro del span
+        const texto = textoSpan.textContent;
+
+        // Dividir el texto en oraciones utilizando el punto como delimitador
+        const oraciones = texto.split('.');
+
+        // Crear un nuevo texto con saltos de línea después de cada punto
+        const nuevoTexto = oraciones.join('.\n');
+
+        // Asignar el nuevo texto al contenido del span
+        textoSpan.textContent = nuevoTexto;
+    });
+
+</script>

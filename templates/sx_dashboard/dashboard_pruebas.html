@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <h1>dashboard</h1>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <canvas id="pie-chart"></canvas>
+
+    <script>
+        var ctx = document.getElementById('pie-chart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: "{{ labels | safe  }}",
+        datasets: "{{ datasets | safe }}"
+    }
+});
+    </script>
+
+</body>
+
+</html>

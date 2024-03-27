@@ -1,0 +1,20 @@
+{% extends 'sx_surveys/base.html' %}
+
+{% load static %} 
+{% block title %}
+Envio correcto
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/surveys/success.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="success-container">
+        <h1>¡Éxito!</h1>
+        <p>Tu formulario ha sido enviado satisfactoriamente.</p>
+    </div>
+{% endblock %}
+
+{% block js %}
+{% endblock %}

@@ -1,0 +1,10 @@
+{% if encuesta %}
+    <!-- Mostrar los valores del formulario asociados al número de orden -->
+    <p>Calificación del Servicio General: {{ encuesta.calificacion_servicio_general }}</p>
+    <!-- Agregar más campos aquí según sea necesario -->
+{% endif %}
+
+{% if mensaje_error %}
+    <!-- Mostrar un mensaje de error si no se encontró ninguna encuesta -->
+    <p>{{ mensaje_error }}</p>
+{% endif %}

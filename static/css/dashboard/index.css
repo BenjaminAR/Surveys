@@ -1,0 +1,53 @@
+body {
+    background-color: #F4F4F4;
+    color: #4c4f52;
+    margin: 0;
+}
+
+header {
+    background-color: #d6d2d2;
+    padding: .7rem;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+
+a{
+    color: #4c4f52!important;
+}
+
+@media (min-width: 950px) {
+    .navbar-nav{
+    padding-right: 3rem;
+    }    
+    .nav-link_person{
+        padding-right: 1rem;
+    }
+}
+
+
+.navbar{
+    background-color: #c3c9ce;
+    padding: .9rem 0;
+}
+
+.total_surveys{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.total_surveys h2{
+    font-size: 1.4rem;
+}
+
+.total_surveys p{
+    font-size: 1.4rem;
+}
+
+.highcharts-credits{
+    display: none;
+}
+

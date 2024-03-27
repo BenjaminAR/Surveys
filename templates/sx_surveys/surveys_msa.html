@@ -1,0 +1,127 @@
+{% extends 'sx_surveys/base.html' %}
+{% load static %} 
+{% block title %}
+Encuesta Mitsubishi San Angel
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/surveys/form.css' %}">
+{% endblock %}
+
+{% block content %}
+<header class="header_mitsu">
+  <img src="{% static 'img/logos/LAsaW.png' %}" alt="Logo Mitsubishi" />
+</header>
+<section class="container-form" style="margin: 5rem">
+  <h2>Encuesta de Servicio</h2>
+  
+  <form class="form_surveys" method="post" enctype="multipart/form-data">
+    {% csrf_token %} 
+
+    <div class="section_form">
+
+      <p style="font-weight: bold; font-size: 1.4rem; margin-bottom: 2px">
+        Estimado Cliente
+      </p>
+      <p style="margin-top: 10px">
+        Gracias por formar parte de la familia Mitsubishi San Ángel, esperamos que
+        la atención que le hemos proporcionado en el área de servicio, haya sido de
+        su satisfacción total. Para elaborar una medición de nuestro servicio y
+        atención al cliente, le agradeceremos se pueda tomar un momento de su tiempo
+        para contestar la siguiente encuesta.
+      </p>
+
+      <h4>Número de orden</h4>
+      <p style="margin: 0; margin-bottom: .6rem;">Propocine el número de orden.</p>
+      {{ form.numero_orden }}
+
+      <h4>¿Eres tú quien vivió toda la experiencia de servicio, desde la recepción hasta la entrega del vehículo?<span style="color: red;">*</span></h4>
+      {{ form.vivio_experiencia_completa }}
+
+      <h4>¿Qué tipo de servicio se realizó a tu vehículo?<span style="color: red;">*</span></h4>
+      {{ form.tipo_servicio }}
+
+      <h4 style="margin-bottom: 2px;">En una escala de 0 a 10 puntos, ¿qué tan probable es que recomiendes a Mitsubishi San Angel a un amigo, familiar o colega?<span style="color: red;">*</span></h4>
+      <p style="margin: 0; margin-bottom: .6rem;">0 al 10 (Inaceptable – Excepcional)</p>
+      {{ form.recomendar_mitsubishi }}
+
+      <h4>¿Cuáles son las razones por las que otorgas esta calificación?</h4>
+      <p style="margin: 0; margin-bottom: .6rem;">Tus respuestas serán usadas para mejorar el servicio, por favor sé lo más específico posible. Puedes incluir ejemplos o relatarnos tu experiencia de servicio.</p>
+      {{ form.razones_recomendacion }}
+    </div>
+    
+    <div class="section_form">
+      <h4 style="font-weight: bold;">Servicio</h4>
+      
+      <h4>¿Tu vehículo fue entregado en el día y a la hora prometidos?<span style="color: red;">*</span></h4>
+      {{ form.vehiculo_entregado_prometido }}
+
+      <h4>¿El costo final del servicio coincidió con el presupuesto inicial que te dieron?<span style="color: red;">*</span></h4>
+      {{ form.costo_final_coincide_presupuesto }}
+
+      <h4>¿Se te explicó las reparaciones hechas a tu vehículo y las que quedaron pendientes?<span style="color: red;">*</span></h4>
+      {{ form.explicacion_reparaciones }}
+
+      <h4>¿Recibiste tu automovil con la limpieza esperada?<span style="color: red;">*</span></h4>
+      {{ form.limpieza_vehiculo }}
+
+      <h4>¿Cómo calificarías tu experiencia en general con el proceso de entrega hecha por Mitsubishi San Angel?<span style="color: red;">*</span></h4>
+      <p style="margin: 0; margin-bottom: .6rem;">0 al 10 (Inaceptable – Excepcional)</p>
+      {{ form.calificacion_entrega_general }}
+    </div>
+
+    <div class="section_form">
+      <h4 style="font-weight: bold;">Asesor</h4>
+      
+      <h4>¿Cuál fue el tiempo de espera en la recepción de su vehículo?<span style="color: red;">*</span></h4>
+      {{ form.tiempo_espera_asesor }}
+
+      <h4>Por favor indique las acciones realizadas por su asesor (puede seleccionar más de una opción)<span style="color: red;">*</span></h4>
+      {{ form.acciones_asesor }}
+
+      <h4>Usando una escala de 0 a 10 puntos ¿cómo calificarías en general la atención brindada por su asesor?*<span style="color: red;"></span></h4>
+      <p style="margin: 0; margin-bottom: .6rem;">0 al 10 (Inaceptable – Excepcional)</p>
+      {{ form.calificacion_atencion_asesor }}
+
+    </div>
+
+    <div class="section_form">
+      <h4 style="font-weight: bold;">Instalaciones</h4>
+      
+      <h4>¿Te ofrecieron algún tipo de cortesías en el distribuidor (por ejemplo: agua, dulces, internet gratuito, etc.)?<span style="color: red;">*</span></h4>
+      {{ form.ofrecieron_cortesias }}
+
+      <h4>Usando una escala de 0 a 10 puntos ¿cómo calificarías las instalaciones de Mitsubishi San Angel?<span style="color: red;">*</span></h4>
+      <p style="margin: 0; margin-bottom: .6rem;">0 al 10 (Inaceptable – Excepcional)</p>
+      {{ form.calificacion_instalaciones }}
+
+    </div>
+
+    <div class="section_form">
+      <h4 style="font-weight: bold;">Entrega</h4>
+      
+      <h4>¿Tu vehículo fue entregado en el día y a la hora prometidos?<span style="color: red;">*</span></h4>
+      {{ form.programacion_cita }}
+
+      <h4>¿Cómo calificarías tu experiencia para programación de una cita de servicio?<span style="color: red;">*</span></h4>
+      {{ form.calificacion_programacion_cita }}
+
+      <h4>¿Te fue posible obtener una cita el día / horario deseado?<span style="color: red;">*</span></h4>
+      {{ form.obtener_cita_deseada }}
+
+      <h4>¿Cómo calificarías tu experiencia en general con el servicio brindado en su última visita por Mitsubishi San Angel?<span style="color: red;">*</span></h4>
+      <p style="margin: 0; margin-bottom: .6rem;">0 al 10 (Inaceptable – Excepcional)</p>
+      {{ form.calificacion_servicio_general }}
+
+    </div>
+
+    <button class="button_send" type="submit">Enviar</button>
+  </form>
+
+
+</section>
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

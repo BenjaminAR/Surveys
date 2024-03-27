@@ -1,0 +1,417 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es-mx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Surveys</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard/index.css' %}" />
+</head>
+
+<body>
+    <!-- Encabezado -->
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top ">
+
+            <div class="container-fluid">
+                <p class="navbar-brand" style="margin: 0; padding: 0; font-size: 1.2rem;">Escuestas de Mitsubishi San
+                    Ángel</p>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link nav-link_person" href="#" onclick="descargarCSV()">Descargar CSV</a>
+                        </li>
+
+                        <li class=" nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Agencias
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Mitsubishi San Angel</a></li>
+                                <li><a class="dropdown-item" href="/sx_dashboard/dashboard_asam/">Mitsubishi
+                                        Morelos</a>
+                                </li>
+                                <li><a class="dropdown-item" href="#">Automotores de México</a></li>
+                                <li><a class="dropdown-item" href="#">Jetour Morelos</a></li>
+                                <li>
+                                    <hr class="dropdown-divider" style="display: none;">
+                                </li>
+                                <li><a class="dropdown-item" href="#" style="display: none;">Something else here</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class=" nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Sesión
+                            </a>
+                            <ul class="dropdown-menu">
+                                {% if user.is_superuser %}
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'sx_accounts:manage_users' %}">Administar
+                                        usuarios</a>
+                                </li>
+                                {% endif %}
+
+                                <li class="nav-item">
+                                    <a class="dropdown-item" href="{% url 'sx_accounts:logout' %}">Cerrar sesión</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider" ">
+                                </li>
+                                <li><a class=" dropdown-item disable" href="#"> {{ user.first_name }} {{ user.last_name }} </a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                    </ul>
+                    <form class="d-flex" id="searchForm" method="post">
+                        <input class="form-control me-2" type="number" placeholder="Número de orden" id="numero_orden"
+                            name="numero_orden">
+                        <button class="btn btn-outline-success" type="submit">Buscar</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <br>
+    <br>
+
+    <div style="display: flex; margin-bottom: 2rem;">
+
+        <form method="post" enctype="multipart/form-data" class="form_date">
+            {% csrf_token %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="fecha_inicio" class="form-label">Fecha de inicio:</label>
+                        <input type="date" id="fecha_inicio" name="fecha_inicio"
+                            value="{{ fecha_inicio | default:fecha_actual }}" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="fecha_fin" class="form-label">Fecha de fin:</label>
+                        <input type="date" id="fecha_fin" name="fecha_fin"
+                            value="{{ fecha_fin | default:fecha_actual }}" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary mt-3">Actualizar</button>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+        <div class="contadores">
+            <div class="total_surveys">
+                <h2>Total de encuestas</h2>
+                <p>{{ total_surveys }}</p>
+            </div>
+        </div>
+
+    </div>
+
+    {% if total_surveys is not 0 %}
+
+    <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
+        <div id="container2" style="min-width: 65%; height: 25rem;"></div>
+    </div>
+
+    <br>
+
+    <div style="display: flex; justify-content: space-around; align-items: center; margin: 0 2rem;">
+        <div id="container3" style="width: 460px; height: 330px;"></div>
+        <div id="container1" style="width: 460px; height: 330px;"></div>
+        <div id="container4" style="width: 460px; height: 330px;"></div>
+    </div>
+
+    <div style="display: flex; justify-content: space-around; align-items: center; margin: 0 2rem; margin-top: 1.5rem;">
+        <div id="container5" style="width: 460px; height: 330px;"></div>
+        <div id="container6" style="width: 460px; height: 330px;"></div>
+        <div id="container7" style="width: 460px; height: 330px;"></div>
+    </div>
+
+
+    <br>
+    <br>
+
+    <!-- Modal-->
+    <div class="modal fade" id="surveyModal" tabindex="-1" aria-labelledby="surveyModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Información de la encuesta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <!-- Aquí se mostrará la información de la encuesta -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary"  onclick="descargarPDF()">Descargar PDF</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        //var data2 = {"0": [1001, 1002, 20009], "10": [1003, 1004, 1006, 1001, 1002, 1003, 1004, 1006, 2010, 9002], "8": [1007], "9": [1010], "7": [1011], "6": [1012], "4": [1012]}
+        var data = '{{ data_json | safe}}';
+        var data_services = '{{ data_json_services | safe }}'
+        var data_recomendar_mitsu = '{{ data_json_recomendar_mitsu | safe }}'
+        var data_calificacion_servicio_general = '{{ data_json_calificacion_servicio_general | safe }}'
+        var data_calificacion_entrega_general = '{{ data_json_calificacion_entrega_general | safe }}'
+        var data_calificacion_atencion_asesor = '{{ data_json_calificacion_atencion_asesor | safe }}'
+        var data_calificacion_instalaciones = '{{ data_json_calificacion_instalaciones | safe }}'
+
+
+
+        //Se trasforman las variables a tipo object "JDSON"
+        var data = JSON.parse(data);
+        var data_services = JSON.parse(data_services);
+        var data_recomendar_mitsu = JSON.parse(data_recomendar_mitsu);
+        var data_calificacion_servicio_general = JSON.parse(data_calificacion_servicio_general);
+        var data_calificacion_entrega_general = JSON.parse(data_calificacion_entrega_general);
+        var data_calificacion_atencion_asesor = JSON.parse(data_calificacion_atencion_asesor);
+        var data_calificacion_instalaciones = JSON.parse(data_calificacion_instalaciones);
+
+
+        Highcharts.chart('container1', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie',
+                backgroundColor: '#F4F4F4',
+            },
+            title: {
+                text: 'Calificación al programar cita'
+            },
+            tooltip: {
+                pointFormatter: function () {
+                    return 'Orden(es): ' + data[this.name].join(', ');
+                }
+            },
+            series: [{
+                name: 'Cantidad',
+                colorByPoint: true,
+                data: processData(data)
+            }]
+        });
+
+        // Configuración de la gráfica de barras de tipos de servicio
+        Highcharts.chart('container2', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'bar',
+                backgroundColor: '#F4F4F4',
+            },
+            title: {
+                text: 'Distribución de servicios'
+            },
+
+            plotOptions: {
+                series: {
+                    borderWidth: 0,
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.y:.1f}%'
+                    }
+                }
+            },
+
+            tooltip: {
+                pointFormatter: function () {
+                    return 'Orden(es): ' + data_services[this.name].join(', ');
+                }
+            },
+            series: [{
+                name: 'Cantidad',
+                colorByPoint: true,
+                data: processData(data_services)
+            }],
+            xAxis: {
+                categories: Object.keys(data_services)
+            },
+            yAxis: {
+                title: {
+                    text: ''
+                }
+            },
+        });
+
+        Highcharts.chart('container3', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie',
+                backgroundColor: '#F4F4F4',
+            },
+            title: {
+                text: 'Recomiendan Mitsubishi San Angel',
+                align: 'center',
+            },
+            tooltip: {
+                pointFormatter: function () {
+                    return 'Orden(es): ' + data_recomendar_mitsu[this.name].join(', ');
+                }
+            },
+
+
+            series: [{
+                name: 'Cantidad',
+                colorByPoint: true,
+                data: processData(data_recomendar_mitsu)
+            }]
+        });
+
+        Highcharts.chart('container4', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie',
+                backgroundColor: '#F4F4F4',
+            },
+            title: {
+                text: 'Calificación del servicio en general'
+            },
+            tooltip: {
+                pointFormatter: function () {
+                    return 'Orden(es): ' + data_calificacion_servicio_general[this.name].join(', ');
+                }
+            },
+            series: [{
+                name: 'Calificacinoes',
+                colorByPoint: true,
+                data: processData(data_calificacion_servicio_general)
+            }]
+        });
+
+        Highcharts.chart('container5', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie',
+                backgroundColor: '#F4F4F4',
+            },
+            title: {
+                text: 'Calificación de la entrega'
+            },
+            tooltip: {
+                pointFormatter: function () {
+                    return 'Orden(es): ' + data_calificacion_entrega_general[this.name].join(', ');
+                }
+            },
+            series: [{
+                name: 'Cantidad',
+                colorByPoint: true,
+                data: processData(data_calificacion_entrega_general)
+            }]
+        });
+
+        Highcharts.chart('container6', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie',
+                backgroundColor: '#F4F4F4',
+            },
+            title: {
+                text: 'Calificación general al asesor'
+            },
+            tooltip: {
+                pointFormatter: function () {
+                    return 'Orden(es): ' + data_calificacion_atencion_asesor[this.name].join(', ');
+                }
+            },
+            series: [{
+                name: 'Cantidad',
+                colorByPoint: true,
+                data: processData(data_calificacion_atencion_asesor)
+            }]
+        });
+
+        Highcharts.chart('container7', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie',
+                backgroundColor: '#F4F4F4',
+            },
+            title: {
+                text: 'Calificación a las instalaciones'
+            },
+            tooltip: {
+                pointFormatter: function () {
+                    return 'Orden(es): ' + data_calificacion_instalaciones[this.name].join(', ');
+                }
+            },
+            series: [{
+                name: 'Cantidad',
+                colorByPoint: true,
+                data: processData(data_calificacion_instalaciones)
+            }]
+        });
+
+        // Función para convertir el JSON en un formato que Highcharts.js pueda entender
+        function processData(data) {
+            var processedData = [];
+            for (var key in data) {
+                processedData.push({ name: key, y: data[key].length });
+            }
+            return processedData;
+        }
+
+
+    </script>
+
+    {% else %}
+
+    <p style="font-weight: bold; text-align: center; margin-top: 5rem;">No se han encontrado datos en el rango de
+        fechas </p>
+
+    {% endif %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+
+
+    <script>
+        var getSurveyModalUrl = "{% url 'sx_dashboard:get_survey_modal' %}";
+        var downloadFilteredDataUrl = "{% url 'sx_dashboard:download_filtered_data' %}";
+        var dowloadOrderPDF = "{% url 'sx_dashboard:dowload_pdf' %}";
+        const sucursal = 1
+    </script>
+
+
+
+    <script src="{% static 'js/dashboard/main.js' %}"></script>
+
+</body>
+
+</html>

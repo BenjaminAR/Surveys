@@ -1,0 +1,8 @@
+<!-- widgets/range_slider_widget.html -->
+<div class="range-container">
+  {% for choice in widget.choices %}
+      <label class="range-marker" nv-val="{{ choice.0 }}" for="{{ widget.id }}_inputID{{ choice.0 }}">
+          {{ choice.1 }}
+      </label>
+  {% endfor %}
+</div>

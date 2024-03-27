@@ -1,0 +1,291 @@
+body {
+  background-color: #cacaca;
+}
+
+h2 {
+  color: var(--secundario);
+  margin-top: 0;
+  font-size: 2.6rem;
+}
+
+.container-form {
+  padding: 2rem;
+  background-color: #ffffff;
+  -webkit-box-shadow: 0px 0px 10px -1px rgba(10, 10, 10, 0.71);
+  -moz-box-shadow: 0px 0px 10px -1px rgba(10, 10, 10, 0.71);
+  box-shadow: 0px 0px 10px -1px rgba(10, 10, 10, 0.71);
+  border-radius: 3px;
+}
+
+@media (max-width: 820px) {
+    .container-form{
+      padding: 1.2rem;
+      margin: 2rem !important;
+    }
+}
+
+@media (max-width: 359px ) {
+  .container-form{
+    padding: 1rem;
+    margin: 1.5rem !important;
+  }
+}
+
+#id_numero_orden{
+  border: solid transparent 1px;
+  padding: 0.5rem 0.6rem;
+  box-shadow: 0 0 2px rgba(237, 30, 30, 1);
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+
+.range-marker-recomendar_mitsubishi, 
+.range-marker-calificacion_programacion_cita, 
+.range-marker-calificacion_atencion_asesor, 
+.range-marker-calificacion_instalaciones,
+.range-marker-calificacion_entrega_general,
+.range-marker-calificacion_servicio_general{
+  padding: 0.25em 0.5em;
+  box-shadow: 0 0 2px rgba(237, 30, 30, 1);
+  width: 0.7rem;
+  margin: 0.3rem;
+  
+}
+
+.range-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center; 
+  margin-bottom: 0.8rem;
+  padding-left: 2.4rem;
+}
+
+p label {
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+p {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+textarea{
+    max-width: 75rem;
+    resize: none;
+    padding: .6rem;
+    box-shadow:  0 0 3px rgba(237, 30, 30, 1);
+    border: transparent;
+    border-radius: 3px;
+}
+
+@media (max-width: 550px) {
+    textarea{
+      width: auto!important;
+      max-width: 15rem;
+    }
+}
+
+
+textarea:focus,
+input:focus {
+    outline: 2px solid rgb(241, 50, 50);
+}
+
+/* Estilo para el contenedor de input[type="radio"] */
+input[type="radio"] {
+  -webkit-appearance: none; /* Elimina el estilo nativo del navegador en Safari/Chrome */
+  -moz-appearance: none; /* Elimina el estilo nativo del navegador en Firefox */
+  margin: 0;
+  appearance: none; /* Elimina el estilo nativo del navegador en otros navegadores */
+  width: 1.1rem; /* Ajusta el tamaño del radio */
+  height: 1.1rem; /* Ajusta el tamaño del radio */
+  border-radius: 30%; /* Bordes redondos */
+  border: 2px solid #999; /* Borde por defecto */
+  position: relative; /* Establece la posición relativa para el contenedor */
+  transition: border-color 0.3s ease-in-out; /* Efecto de transición para el borde */
+}
+
+/* Estilo para el contenedor de input[type="radio"] cuando está enfocado */
+input[type="radio"]:focus {
+  outline: none; /* Elimina el contorno por defecto del enfoque */
+  border-color: #7f7878; /* Cambia el color del borde cuando está enfocado */
+}
+
+/* Estilo para el contenedor de input[type="radio"] cuando está seleccionado */
+input[type="radio"]:checked {
+  border-color: var(--secundario); /* Cambia el color del borde cuando está seleccionado */
+}
+
+/* Estilo para la "bolita" dentro del círculo cuando está seleccionado */
+input[type="radio"]:checked::before {
+  content: ''; /* Necesario para agregar un contenido al pseudo-elemento */
+  width: 0.6rem; /* Ajusta el tamaño de la bolita */
+  height: 0.6rem; /* Ajusta el tamaño de la bolita */
+  background-color: var(--secundario); /* Color de la bolita */
+  border-radius: 50%; /* Bordes redondos */
+  position: absolute; /* Establece la posición absoluta para el pseudo-elemento */
+  top: 50%; /* Centra verticalmente la bolita */
+  left: 50%; /* Centra horizontalmente la bolita */
+  transform: translate(-50%, -50%); /* Mueve la bolita al centro */
+}
+
+/* Opcional: Estilo para el contenedor de input[type="radio"] cuando está deshabilitado */
+input[type="radio"]:disabled {
+  opacity: 0.5; /* Reduce la opacidad cuando está deshabilitado */
+  cursor: not-allowed; /* Cambia el cursor cuando está deshabilitado */
+}
+
+
+input{
+    margin: 6px 0;
+}
+
+ul{
+  padding-inline-start: 2rem;
+}
+
+ul li{
+    text-decoration: none;
+    list-style: none;
+    margin: 10px 0;
+}
+
+.header_mitsu{
+  background-color: black;
+  height: 11.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header_mitsu img{
+  width: 8rem;
+}
+X
+footer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+}
+
+.aviso_privacidad{
+  color: black;
+  text-decoration: none;
+}
+
+#id_recomendar_mitsubishi,
+#id_calificacion_programacion_cita, 
+#id_calificacion_instalaciones, 
+#id_calificacion_entrega_general,
+#id_calificacion_atencion_asesor,
+#id_calificacion_servicio_general{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  color: red;
+}
+
+#id_calificacion_programacion_cita label,
+#id_calificacion_instalaciones label,
+#id_calificacion_entrega_general label,
+#id_calificacion_atencion_asesor label,
+#id_recomendar_mitsubishi label,
+#id_calificacion_servicio_general label{
+  font-size: 25px;
+  margin-left: 1.2rem;
+  z-index: 2;
+  color: red;
+}
+
+.radio_select_interbalos::checked {
+  background-color: #e8bf09; /* Color de fondo cuando está seleccionado */
+  border-color: rgb(215, 12, 70); /* Color del borde cuando está seleccionado */
+}
+
+.radio_select_interbalos[type=radio] {
+  border-radius: 0% !important;
+  background-color: #e8bf09 !important;
+}
+
+h4{
+  margin: 0;
+  margin-bottom: .6rem;
+}
+
+.section_form{
+  border: solid 1px rgb(206, 198, 198);
+  padding: 1rem 1.5rem;
+  border-radius: 3px;
+  margin-bottom: 2rem;
+}
+
+.button_send{
+  background-color: rgb(207, 10, 10);
+  color: white;
+  padding: .8rem 2.5rem;
+  border: solid rgba(207, 10, 10, 0) 1px;
+  border-radius: 3px;
+  transition: background-color ease .4s;
+}
+
+.button_send:hover{
+  color: rgb(207, 10, 10);
+  background-color: white;
+  border: solid rgb(207, 10, 10) 1px;
+}
+
+footer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.section_form div div{
+  margin: .7rem 0!important;
+}
+
+.section_form div div label{
+  margin-bottom: .5rem 0!important;
+}
+
+#id_recomendar_mitsubishi[type=radio]{
+  margin-left: -1.8rem;
+}
+
+
+@media (max-width: 1081px) {
+  #id_calificacion_programacion_cita label, 
+  #id_calificacion_instalaciones label, 
+  #id_calificacion_entrega_general label, 
+  #id_calificacion_atencion_asesor label, 
+  #id_recomendar_mitsubishi label, 
+  #id_calificacion_servicio_general label {
+    margin-left: revert-layer !important;
+}
+}
+
+
+.container-form{
+  margin: 2rem!important;
+}
+
+@media (max-width: 768px) {
+  .container-form{
+    margin: 1rem!important;
+  }    
+  textarea{
+    max-width: 100%;
+    width: 95%;
+  }
+  h4{
+    font-size: 1.3rem;
+  }
+}

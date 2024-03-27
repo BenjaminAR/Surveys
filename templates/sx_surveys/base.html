@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es-mx">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Base{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/global.css' %}"/>
+    
+    {% block css %}
+    
+    {% endblock %}
+
+</head>
+<body>
+
+    <main>
+        {% block content %}
+            
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Grupo Automotores de México. Todos los derechos reservados.</p>
+        <a class="aviso_privacidad" href="https://www.mitsubishi-motors.mx/legal/aviso-de-privacidad" target="_blank">Aviso de privacidad</a>
+        <br>
+        <br>
+    </footer>
+    {% block js %}
+    {% endblock %}
+</body>
+</html>

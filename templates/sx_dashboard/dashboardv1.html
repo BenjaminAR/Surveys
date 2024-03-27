@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es-mx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Surveys</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard/index.css' %}" />
+</head>
+
+<body>
+    <!-- Encabezado utilizando Flowbite -->
+    <header>
+        <div class="container mx-auto">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-white">Survays Automotores de San Angel <span><i
+                            class="fa-solid fa-chevron-down"></i></span> </h1>
+                <nav>
+                    <a href="#" class="text-white">Estadísticas</a>
+                    <div class="relative">
+                        <a href="#" class="text-white">Configuración</a>
+                        <div class="sub-menu">
+                            <a href="#">Automotores de San Angel</a>
+                            <a href="#">Mitsubishi Morelos</a>
+                            <a href="#">Opción 3</a>
+                        </div>
+                    </div>
+                    <a href="#" class="text-white">Ayuda</a>
+                    <div class="menu-button" onclick="toggleMenu()">☰</div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <form method="post" method="post" enctype="multipart/form-data" class="form_date">
+        {% csrf_token %}
+        <label for="fecha_inicio">Fecha de inicio:</label>
+        <input type="date" id="fecha_inicio" name="fecha_inicio" value="{{ fecha_inicio|default:fecha_actual }}">
+
+        <label for="fecha_fin">Fecha de fin:</label>
+        <input type="date" id="fecha_fin" name="fecha_fin" value="{{ fecha_fin|default:fecha_actual }}">
+
+        <button type="submit">Actualizar</button>
+    </form>
+
+    <div class="contadores">
+        <div class="total_surveys">
+            <h2>Total de encuestas</h2>
+            <p>{{ total_surveys }}</p>
+        </div>
+
+    </div>
+
+    <div class="grafic_container_person">
+        <div class="grafic_pie">
+            {% if fig1 is not None %}
+            {{ fig1 | safe }}
+        </div>
+
+        <div class="grafic_pie">
+            {{ fig2 | safe }}
+        </div>
+
+        <div class="grafic_pie">
+            {{ fig3 | safe }}
+        </div>
+
+        {% else %}
+        <p>No hay datos</p>
+        {% endif %}
+    </div>
+
+
+    <script src="{% static 'js/dashboard.js' %}"></script>
+    
+    <script>
+        var dfAgrupado = JSON.parse("{{ df_agrupado | safe }}");
+        // Ahora dfAgrupado contiene los datos de df_agrupado como un objeto JavaScript
+
+        // Itera sobre los datos y agrega los números de orden a la gráfica fig3
+        var numerosOrden = dfAgrupado.map(item => item.numeros_orden);
+        console.log(numerosOrden)
+    // Aquí puedes usar la variable numerosOrden para agregar los números de orden a la gráfica fig3 según sea necesario
+    </script>
+
+
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+
+
+</body>
+
+</html>

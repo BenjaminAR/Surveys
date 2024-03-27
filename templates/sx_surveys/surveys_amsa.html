@@ -1,0 +1,62 @@
+{% extends 'sx_surveys/base.html' %}
+{% load static %} 
+{% block title %}
+Encuesta Automotores de México
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/surveys/form.css' %}">
+<style>
+    .logo_amsa{
+        height: 5rem;
+        width: 20rem !important;
+    }
+    
+</style>
+{% endblock %}
+
+{% block content %}
+    <header class="header_mitsu">
+        <img src="{% static 'img/logos/LamsaW1.png' %}" class="logo_amsa" alt="Logo AMSA" />
+    </header>
+    <section class="container-form" style="margin: 5rem">
+        <h2>Encuesta de Servicio</h2>
+        <p style="font-weight: bold; font-size: 1.4rem; margin-bottom: 2px">
+            Estimado Cliente
+        </p>
+        <p style="margin-top: 10px">
+            Gracias por formar parte de la familia Automotores de México, esperamos que
+            la atención que le hemos proporcionado en el área de servicio, haya sido de
+            su satisfacción total. Para elaborar una medición de nuestro servicio y
+            atención al cliente, le agradeceremos se pueda tomar un momento de su tiempo
+            para contestar la siguiente encuesta.
+        </p>
+
+        <form action="">
+            {{ form.as_p }}
+        </form>
+    </section>
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/widgets/widgets.js' %}"></script>
+<!-- Script para manejar el modal -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+  // Cuando el documento esté listo
+  $(document).ready(function () {
+    // Manejar el cierre del modal
+    $(".close").click(function () {
+      $("#errorModal").hide();
+    });
+  });
+
+  // Función para mostrar el modal de error
+  function showErrorModal(message) {
+    $("#errorText").text(message);
+    $("#errorModal").show();
+  }
+</script>
+
+{% endblock %}

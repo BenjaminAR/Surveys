@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {% load crispy_forms_tags %}
+    <title>Eliminar usuario</title>
+</head>
+<body>
+    <h2>Se eliminara el usuario: {{ user }}</h2>
+    <ul>
+        
+        <form method="post">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <input type="submit" value="Eliminar">
+        </form>
+    </ul>
+</body>
+</html>

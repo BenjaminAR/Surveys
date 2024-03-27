@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es-mx">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bienvenido | Selección de empresa</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/normalize.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/global.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/surveys/index.css' %}"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+  </head>
+  <body>
+    <header>
+        <a href="{% url 'sx_accounts:login' %}"><i class="fa-solid fa-user user-login" style="color: white;"></i></a>
+    </header>
+    <div class="container">
+    <div class="description">
+      <h2>Encuestas de servicio</h2>
+      <p>Seleccione una empresa</p>
+    </div>
+    <section class="conatiner-widget">
+      <div class="widget">
+        <a href="{% url 'sx_surveys:surveys_amsa' %}"
+          ><img
+            src="{%static 'img/logos/LamsaW1.png'%}"
+            alt="Automotores de México"
+        /></a>
+      </div>
+      <div class="widget" style="width: 9rem;">
+        <a href="{% url 'sx_surveys:surveys_msa' %}"
+          ><img
+            src="{%static 'img/logos/LMW.png'%}"
+            alt="Mitsubishi San Angel"/>
+            <h2 style="font-weight: bold; font-size: 1.6rem; margin: 5px 0px; color: white;">SAN ANGEL</h2>
+        </a>
+      </div>
+      <div class="widget" style="width: 9rem;">
+        <a href="{% url 'sx_surveys:surveys_asam' %}">
+          <img src="{%static 'img/logos/LMW.png'%}" alt="Mitsubishi Morelos"/>
+        <h2 style="font-weight: bold; font-size: 1.6rem; margin: 5px 0px; color: white;">MORELOS</h2>
+    </a>
+      </div>
+      <div class="widget">
+        <a href="#"
+          ><img src="{%static 'img/logos/LJetourMW.png'%}" alt="Jetour"
+        /></a>
+      </div>
+    </section>
+</div>
+  </body>
+</html>
