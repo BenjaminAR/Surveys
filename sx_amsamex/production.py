@@ -1,5 +1,5 @@
 from .settings import *
 
-ALLOWED_HOSTS = ["74.208.60.6","devyios.com"]
+ALLOWED_HOSTS = config('ALLOWED_HOSTS_PRD', cast=lambda v: [s.strip() for s in v.split(',')])
 
-DEBUG = False
+DEBUG = config('DEBUG_PRD', default=False, cast=bool)
