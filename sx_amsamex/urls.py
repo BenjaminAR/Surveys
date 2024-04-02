@@ -18,6 +18,8 @@ from django.urls import path, include
 from apps.sx_accounts.views import login_view
 from django.conf.urls import handler404
 from apps.sx_login.views import page_not_found404
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -27,6 +29,6 @@ urlpatterns = [
     path('sx_dashboard/', include('apps.sx_dashboard.urls'), name='dashboard'),
     path('sx_login_e/', include('apps.sx_login.urls'), name='login_error'),
     path('', include('apps.sx_surveys.urls'), name='surveys'),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 handler404 = page_not_found404
