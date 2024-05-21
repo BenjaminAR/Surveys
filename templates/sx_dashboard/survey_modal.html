@@ -12,7 +12,11 @@
 
 <p style="text-align: center; font-weight: bold;">Orden: {{ encuesta.numero_orden }}</p>
 <p>Fecha: <span>{{ encuesta.fecha }}</span></p>
-<p>¿El cliente vivió toda la experiencia de servicio?: <span>{{ encuesta.vivio_experiencia_completa_texto }}</span> </p>
+<h5>Datos cliente</h5>
+<p>Nombre: <span>{{ encuesta.nombre_cliente }}</span></p>
+<p>Número de telefono: <span>{{ encuesta.numero_telefono }}</span></p>
+<p>Correo electronico: <span>{{ encuesta.correo_cliente }}</span></p>
+<p>¿El cliente vivió toda la experiencia de servicio?: <span>{{ encuesta.vivio_experiencia_completa_texto }}</span></p>
 <p>Tipo de servicio que se realizó a su vehículo: <br><span>{{ encuesta.tipo_servicio }} </span></p>
 <p>De 0 a 10 recomendó a la agencia: <span>{{ encuesta.recomendar_mitsubishi }}</span></p>
 <p>Razon(es) por las que ha decidido calificar su recomendación: <br> <span style="margin-top: 1rem;"> {{ encuesta.razones_recomendacion }} </span></p>
@@ -41,7 +45,6 @@
 
     document.addEventListener('DOMContentLoaded', function () {
 
-        console.log('Hola mundo')
         // Obtener el elemento span
         const textoSpan = document.getElementById('texto_punto_salto');
 

@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Surveys</title>
+    <title>Dashboard Surveys AMSA</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
@@ -22,12 +22,26 @@
         <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top ">
 
             <div class="container-fluid">
-                <p class="navbar-brand" style="margin: 0; padding: 0; font-size: 1.2rem;">Escuestas de Mitsubishi
-                    Morelos</p>
+                <p class="navbar-brand" style="margin: 0; padding: 0; font-size: 1.2rem;">Automotores de México.</p>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link nav-link_person" onclick="descargarCSV()">Descargar CSV</a>
+                        <li class="nav-item" style="display: none;">
+                            <a class="nav-link nav-link_person" href="#" onclick="descargarExcel()">Descargar excel</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Descargas
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#" onclick="descargarExcel()">Excel</a></li>
+                                <li><a class="dropdown-item" href="#">PDF</a></li>
+                                <li>
+                                    <hr class="dropdown-divider" style="display: none;">
+                                </li>
+                                <li><a class="dropdown-item" href="#" style="display: none;">Something else here</a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -35,10 +49,9 @@
                                 Agencias
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/sx_dashboard/dashboard/">Mitsubishi San Angel</a>
-                                </li>
-                                <li><a class="dropdown-item" href="#">Mitsubishi Morelos</a></li>
-                                <li><a class="dropdown-item" href="/sx_dashboard/dashboard_amsa/">Automotores de México</a></li>
+                                <li><a class="dropdown-item" href="/sx_dashboard/dashboard/">Mitsubishi San Angel</a></li>
+                                <li><a class="dropdown-item" href="/sx_dashboard/dashboard_asam/">Mitsubishi Morelos</a></li>
+                                <li><a class="dropdown-item" href="#">Automotores de México</a></li>
                                 <li><a class="dropdown-item" href="#">Jetour Morelos</a></li>
                                 <li>
                                     <hr class="dropdown-divider" style="display: none;">
@@ -165,22 +178,20 @@
         //var data2 = {"0": [1001, 1002, 20009], "10": [1003, 1004, 1006, 1001, 1002, 1003, 1004, 1006, 2010, 9002], "8": [1007], "9": [1010], "7": [1011], "6": [1012], "4": [1012]}
         var data = '{{ data_json | safe}}';
         var data_services = '{{ data_json_services | safe }}'
-        var data_recomendar_mitsu = '{{ data_json_recomendar_mitsu | safe }}'
-        var data_calificacion_servicio_general = '{{ data_json_calificacion_servicio_general | safe }}'
-        var data_calificacion_entrega_general = '{{ data_json_calificacion_entrega_general | safe }}'
-        var data_calificacion_atencion_asesor = '{{ data_json_calificacion_atencion_asesor | safe }}'
-        var data_calificacion_instalaciones =  '{{ data_json_calificacion_instalaciones | safe }}'
+        var data_recomendar = '{{ data_json_recomendar | safe }}'
+        var data_calificacion_instalaciones_amenidades = '{{ data_json_calificacion_instalaciones_amenidades | safe }}'
+        var data_capacidad_asesor_generar_confianza = '{{ data_json_calificacion_atencion_asesor | safe }}'
+        var data_calificacion_asesor_general = '{{ data_json_data_calificacion_asesor_general | safe }}'
         
-
 
         //Se trasforman las variables a tipo object "JDSON"
         var data = JSON.parse(data);
         var data_services = JSON.parse(data_services);
-        var data_recomendar_mitsu = JSON.parse(data_recomendar_mitsu);
-        var data_calificacion_servicio_general = JSON.parse(data_calificacion_servicio_general);
-        var data_calificacion_entrega_general = JSON.parse(data_calificacion_entrega_general);
-        var data_calificacion_atencion_asesor = JSON.parse(data_calificacion_atencion_asesor);
-        var data_calificacion_instalaciones = JSON.parse(data_calificacion_instalaciones);
+        var data_recomendar = JSON.parse(data_recomendar);
+        var data_calificacion_instalaciones_amenidades = JSON.parse(data_calificacion_instalaciones_amenidades);
+        var data_capacidad_asesor_generar_confianza = JSON.parse(data_capacidad_asesor_generar_confianza);
+        var data_calificacion_asesor_general = JSON.parse(data_calificacion_asesor_general);
+
 
 
         Highcharts.chart('container1', {
@@ -192,17 +203,17 @@
                 backgroundColor: '#F4F4F4',
             },
             title: {
-                text: 'Calificación al programar cita'
+                text: 'Recomiendan a Automotores de México.'
             },
             tooltip: {
                 pointFormatter: function () {
-                    return 'Orden(es): ' + data[this.name].join(', ');
+                    return 'Orden(es): ' + data_recomendar[this.name].join(', ');
                 }
             },
             series: [{
                 name: 'Cantidad',
                 colorByPoint: true,
-                data: processData(data)
+                data: processData(data_recomendar)
             }]
         });
 
@@ -216,7 +227,7 @@
                 backgroundColor: '#F4F4F4',
             },
             title: {
-                text: 'Distribución de servicios'
+                text: 'Distribución de servicios.'
             },
 
             plotOptions: {
@@ -258,12 +269,12 @@
                 backgroundColor: '#F4F4F4',
             },
             title: {
-                text: 'Recomiendan Mitsubishi San Angel',
+                text: 'Calificación al programar cita.',
                 align: 'center',
             },
             tooltip: {
                 pointFormatter: function () {
-                    return 'Orden(es): ' + data_recomendar_mitsu[this.name].join(', ');
+                    return 'Orden(es): ' + data[this.name].join(', ');
                 }
             },
 
@@ -271,7 +282,7 @@
             series: [{
                 name: 'Cantidad',
                 colorByPoint: true,
-                data: processData(data_recomendar_mitsu)
+                data: processData(data)
             }]
         });
         
@@ -284,17 +295,17 @@
                 backgroundColor: '#F4F4F4',
             },
             title: {
-                text: 'Calificación del servicio en general'
+                text: 'Calificación a las instalaciones.'
             },
             tooltip: {
                 pointFormatter: function () {
-                    return 'Orden(es): ' + data_calificacion_servicio_general[this.name].join(', ');
+                    return 'Orden(es): ' + data_calificacion_instalaciones_amenidades[this.name].join(', ');
                 }
             },
             series: [{
                 name: 'Calificacinoes',
                 colorByPoint: true,
-                data: processData(data_calificacion_servicio_general)
+                data: processData(data_calificacion_instalaciones_amenidades)
             }]
         });
 
@@ -307,17 +318,17 @@
                 backgroundColor: '#F4F4F4',
             },
             title: {
-                text: 'Calificación de la entrega'
+                text: 'Calificación al asesor al generar confinza'
             },
             tooltip: {
                 pointFormatter: function () {
-                    return 'Orden(es): ' + data_calificacion_entrega_general[this.name].join(', ');
+                    return 'Orden(es): ' + data_capacidad_asesor_generar_confianza[this.name].join(', ');
                 }
             },
             series: [{
                 name: 'Cantidad',
                 colorByPoint: true,
-                data: processData(data_calificacion_entrega_general)
+                data: processData(data_capacidad_asesor_generar_confianza)
             }]
         });
 
@@ -330,40 +341,17 @@
                 backgroundColor: '#F4F4F4',
             },
             title: {
-                text: 'Calificación general al asesor'
+                text: 'Calificación general al asesor.'
             },
             tooltip: {
                 pointFormatter: function () {
-                    return 'Orden(es): ' + data_calificacion_atencion_asesor[this.name].join(', ');
+                    return 'Orden(es): ' + data_calificacion_asesor_general[this.name].join(', ');
                 }
             },
             series: [{
                 name: 'Cantidad',
                 colorByPoint: true,
-                data: processData(data_calificacion_atencion_asesor)
-            }]
-        });
-
-        Highcharts.chart('container7', {
-            chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false,
-                type: 'pie',
-                backgroundColor: '#F4F4F4',
-            },
-            title: {
-                text: 'Calificación a las instalaciones'
-            },
-            tooltip: {
-                pointFormatter: function () {
-                    return 'Orden(es): ' + data_calificacion_instalaciones[this.name].join(', ');
-                }
-            },
-            series: [{
-                name: 'Cantidad',
-                colorByPoint: true,
-                data: processData(data_calificacion_instalaciones)
+                data: processData(data_calificacion_asesor_general)
             }]
         });
         
@@ -397,10 +385,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
     <script>
-        var getSurveyModalUrl = "{% url 'sx_dashboard:get_survey_modal' %}";
+        var getSurveyModalUrl = "{% url 'sx_dashboard:get_survey_modal_amsa' %}";
         var downloadFilteredDataUrl = "{% url 'sx_dashboard:download_filtered_data' %}";
-        var dowloadOrderPDF = "{% url 'sx_dashboard:dowload_pdf' %}";
-        var sucursal = 2
+        var dowloadOrderPDF = "{% url 'sx_dashboard:dowload_pdf_amsa' %}";
+        var sucursal = 3
+        var dowloadOrderxlsx = "{% url 'sx_dashboard:descargar_excel' %}";
     </script>
     
         

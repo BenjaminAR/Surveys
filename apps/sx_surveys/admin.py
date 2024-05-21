@@ -4,3 +4,4 @@ from .models import *
 
 admin.site.register(Encuesta)
 admin.site.register(Agencias)
+admin.site.register(Encuesta_automotores)

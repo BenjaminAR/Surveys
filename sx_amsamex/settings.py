@@ -82,7 +82,19 @@ WSGI_APPLICATION = 'sx_amsamex.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-#DATABASES = db.SQLITE
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+#PRD
+'''
+
+
+
 
 DATABASES = {
     'default': {
@@ -94,15 +106,7 @@ DATABASES = {
         'PORT': config('DB_PORT'),
     }
 }
-#PRD
-'''
 
-SQLITE = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 MARIADB = {
     'default': {

@@ -45,7 +45,9 @@ h2 {
 .range-marker-calificacion_atencion_asesor, 
 .range-marker-calificacion_instalaciones,
 .range-marker-calificacion_entrega_general,
-.range-marker-calificacion_servicio_general{
+.range-marker-calificacion_servicio_general,
+.range-marker-recomendar_a_familiares_amigos,
+.range-marker-calificacion_instalaciones_amenidades{
   padding: 0.25em 0.5em;
   box-shadow: 0 0 2px rgba(237, 30, 30, 1);
   width: 0.7rem;
@@ -89,6 +91,19 @@ textarea{
     }
 }
 
+
+input[type="text"],input[type="email"] {
+  border: solid transparent 1px;
+  padding: 0.5rem 0.6rem;
+  box-shadow: 0 0 2px rgba(237, 30, 30, 1);
+  margin: 0;
+  margin-bottom: 1rem;
+  min-width: 70%;
+}
+
+#id_numero_telefono{
+  min-width: auto;
+}
 
 textarea:focus,
 input:focus {
@@ -184,12 +199,23 @@ footer{
 #id_calificacion_instalaciones, 
 #id_calificacion_entrega_general,
 #id_calificacion_atencion_asesor,
-#id_calificacion_servicio_general{
+#id_calificacion_servicio_general,
+#id_recomendar_a_familiares_amigos,
+#id_calificacion_instalaciones_amenidades,
+#id_calificacion_asesor_general,
+#id_detalle_explicaciones_asesor,
+#id_capacidad_asesor_generar_confianza,
+#id_condiciones_vehiculo_despues_trabajo,
+#id_limpieza_vehiculo_devolucion,
+#id_programacion_cita,
+#id_capacidad_asesor_entender_necesidades{
   display: flex;
   justify-content: flex-start;
   align-items: center;
   gap: 1rem;
   color: red;
+  margin: 0;
+  margin-bottom: 1rem;
 }
 
 #id_calificacion_programacion_cita label,
@@ -197,7 +223,16 @@ footer{
 #id_calificacion_entrega_general label,
 #id_calificacion_atencion_asesor label,
 #id_recomendar_mitsubishi label,
-#id_calificacion_servicio_general label{
+#id_calificacion_servicio_general label,
+#id_recomendar_a_familiares_amigos label,
+#id_calificacion_instalaciones_amenidades label,
+#id_calificacion_asesor_general label,
+#id_detalle_explicaciones_asesor label,
+#id_capacidad_asesor_generar_confianza label,
+#id_condiciones_vehiculo_despues_trabajo label,
+#id_limpieza_vehiculo_devolucion label,
+#id_programacion_cita label,
+#id_capacidad_asesor_entender_necesidades label{
   font-size: 25px;
   margin-left: 1.2rem;
   z-index: 2;
@@ -229,10 +264,11 @@ h4{
 .button_send{
   background-color: rgb(207, 10, 10);
   color: white;
-  padding: .8rem 2.5rem;
+  padding: 1.2rem 2.5rem;
   border: solid rgba(207, 10, 10, 0) 1px;
   border-radius: 3px;
   transition: background-color ease .4s;
+  width: 100%;
 }
 
 .button_send:hover{
@@ -249,7 +285,7 @@ footer{
 }
 
 .section_form div div{
-  margin: .7rem 0!important;
+  margin: .7rem 0;
 }
 
 .section_form div div label{
@@ -288,4 +324,27 @@ footer{
   h4{
     font-size: 1.3rem;
   }
+  input[type="text"],input[type="email"] {
+    min-width: 90%;
+  }
+}
+
+
+@media (max-width: 470px) {
+  #id_recomendar_mitsubishi, #id_calificacion_programacion_cita, #id_calificacion_instalaciones, #id_calificacion_entrega_general, #id_calificacion_atencion_asesor, #id_calificacion_servicio_general {
+    flex-direction: column;
+    align-items: normal;
+    gap: 0;
+  }
+  .section_form div div {
+    margin: .3rem 0;
+  }
+  .section_form div div:last-child{
+    margin-bottom: 1rem;
+  }
+
+}
+
+.section_form div{
+  margin: 1rem .2rem;
 }

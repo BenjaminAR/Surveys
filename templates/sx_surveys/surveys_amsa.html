@@ -1,5 +1,5 @@
 {% extends 'sx_surveys/base.html' %}
-{% load static %} 
+{% load static %}
 {% block title %}
 Encuesta Automotores de México
 {% endblock %}
@@ -7,35 +7,122 @@ Encuesta Automotores de México
 {% block css %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/surveys/form.css' %}">
 <style>
-    .logo_amsa{
-        height: 5rem;
-        width: 20rem !important;
-    }
-    
+  .logo_amsa {
+    height: 5rem;
+    width: 18rem !important;
+  }
 </style>
 {% endblock %}
 
 {% block content %}
-    <header class="header_mitsu">
-        <img src="{% static 'img/logos/LamsaW1.png' %}" class="logo_amsa" alt="Logo AMSA" />
-    </header>
-    <section class="container-form" style="margin: 5rem">
-        <h2>Encuesta de Servicio</h2>
-        <p style="font-weight: bold; font-size: 1.4rem; margin-bottom: 2px">
-            Estimado Cliente
-        </p>
-        <p style="margin-top: 10px">
-            Gracias por formar parte de la familia Automotores de México, esperamos que
-            la atención que le hemos proporcionado en el área de servicio, haya sido de
-            su satisfacción total. Para elaborar una medición de nuestro servicio y
-            atención al cliente, le agradeceremos se pueda tomar un momento de su tiempo
-            para contestar la siguiente encuesta.
-        </p>
+<header class="header_mitsu">
+  <img src="{% static 'img/logos/LamsaW1.png' %}" class="logo_amsa" alt="Logo AMSA" />
+</header>
+<section class="container-form" style="margin: 5rem">
+  <h2>Encuesta de Servicio</h2>
+  <p style="font-weight: bold; font-size: 1.4rem; margin-bottom: 2px">
+    Estimado Cliente
+  </p>
+  <p style="margin-top: 10px">
+    Gracias por formar parte de la familia Automotores de México, esperamos que
+    la atención que le hemos proporcionado en el área de servicio, haya sido de
+    su satisfacción total. Para elaborar una medición de nuestro servicio y
+    atención al cliente, le agradeceremos se pueda tomar un momento de su tiempo
+    para contestar la siguiente encuesta.
+  </p>
 
-        <form action="">
-            {{ form.as_p }}
-        </form>
-    </section>
+  <form class="form_surveys" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <h4>Nombre</h4>
+    <p style="margin: 0; margin-bottom: .6rem;">Proporcione su nombre.</p>
+    {{ form.nombre_cliente|escape }}
+
+    <h4>Número de telefono</h4>
+    <p style="margin: 0; margin-bottom: .6rem;">Proporcione un número de télefono para seguimineto.</p>
+    {{ form.numero_telefono|escape }}
+
+    <h4>Correo electrónico</h4>
+    <p style="margin: 0; margin-bottom: .6rem;">Proporcione un correo electrónico para seguimineto.</p>
+    {{ form.correo_cliente|escape }}
+
+    <h4>Número de orden</h4>
+    <p style="margin: 0; margin-bottom: .6rem;">Proporcione el número de orden.</p>
+    {{ form.numero_orden|escape }}
+    <div class="section_form">
+
+      <h4>En una escala de 0 a 10 puntos, ¿qué tan probable es que recomiendes a Automotores de México a un amigo, familiar o colega?<span style="color: red;">*</span></h4>
+      {{ form.recomendar_a_familiares_amigos|escape }}
+      
+      <h4>¿Qué tipo de trabajo le fue realizado a su vehículo?<span style="color: red;">*</span></h4>
+      {{ form.tipo_trabajo_realizado|escape }}
+
+      <h4>En una escala de 0 a 10 puntos, ¿Cómo califica el proceso para programar su cita al taller de servicio?<span style="color: red;">*</span></h4>
+      {{ form.programacion_cita|escape }}
+
+      <h4>¿Pudo sacar una cita el día/hora que usted quiso?<span style="color: red;">*</span></h4>
+      {{ form.sacar_cita_deseada|escape }}
+
+      <h4>¿Cómo programó esta visita de servicio?<span style="color: red;">*</span></h4>
+      {{ form.como_programo_visita_servicio|escape }}
+
+      <h4>¿Se le ofreció apoyo para solicitar transporte alternativo?, seleccione cuál.<span style="color: red;">*</span></h4>
+      {{ form.apoyo_transporte_alternativo|escape }}
+
+      <h4>En una escala de 0 a 10 puntos, ¿Cómo evalúa las instalaciones del distribuidor y las amenidades ofrecidas?<span style="color: red;">*</span></h4>
+      {{ form.calificacion_instalaciones_amenidades|escape }}
+      
+      <h4>¿Cómo califica la capacidad del asesor para entender sus necesidades y responder a sus preguntas?<span style="color: red;">*</span></h4>
+      {{ form.capacidad_asesor_entender_necesidades|escape }}
+      
+      <h4>En una escala de 0 a 10 puntos, ¿Cómo evalúa a su asesor de servicio en general?<span style="color: red;">*</span></h4>
+      {{ form.calificacion_asesor_general|escape }}
+
+      <h4>¿El asesor de servicio le mantuvo informado del estado de su vehículo durante su visita al taller?<span style="color: red;">*</span></h4>
+      {{ form.mantener_informado_estado_vehiculo|escape }}
+
+      <h4>Usando una escala de 0 a 10 puntos, ¿Cómo califica el detalle de las explicaciones que su asesor de servicio le brindó?<span style="color: red;">*</span></h4>
+      {{ form.detalle_explicaciones_asesor|escape }}
+
+      <h4>En una escala de 0 a 10 puntos, ¿Cómo califica la capacidad del asesor para generar confianza con respecto al servicio prestado?<span style="color: red;">*</span></h4>
+      {{ form.capacidad_asesor_generar_confianza|escape }}
+
+      <h4>¿El trabajo fue completado bien y a la primera?<span style="color: red;">*</span></h4>
+      {{ form.trabajo_completado_primera|escape }}
+
+      <div id="motivo_trabajo_no_completado_primera_wrapper" style="display: none;">
+        <h4>¿Por qué considera que los trabajos solicitados no fueron realizados bien y a la primera?<span style="color: red;">*</span></h4>
+        {{ form.motivo_trabajo_no_completado_primera|escape }}
+      </div>
+      
+      <h4>En una escala de 0 a 10 puntos, ¿Cómo califica las condiciones del vehículo después del trabajo realizado, con respecto al estado original?<span style="color: red;">*</span></h4>
+      {{ form.condiciones_vehiculo_despues_trabajo|escape }}
+
+      <h4>En una escala de 0 a 10 puntos, ¿Cómo califica la limpieza del vehículo en la devolución?<span style="color: red;">*</span></h4>
+      {{ form.limpieza_vehiculo_devolucion|escape }}
+
+      <h4>¿Recibió una llamada de cortesía de su distribuidor unos días después de la entrega de su vehículo?<span style="color: red;">*</span></h4>
+      {{ form.llamada_cortesia_despues_entrega_vehiculo|escape }}
+      
+      <h4>¿El vehículo estuvo listo a la hora acordada?<span style="color: red;">*</span></h4>
+      {{ form.vehiculo_listo_hora_acordada|escape }}
+
+      <h4>¿Considera que el personal del distribuidor valoró su tiempo, durante su visita al taller?<span style="color: red;">*</span></h4>
+      {{ form.personal_distribuidor_valoro_tiempo|escape }}      
+
+    </div>
+
+    <div class="section_form" style="padding: .1rem 1rem ;">
+      <p>
+        Agradecemos mucho el tiempo que se ha tomado en responder nuestra encuesta, estamos seguro de que sus respuestas y comentarios nos ayudarán a mejorar nuestro servicio.
+        Recuerde que Automotores de México, siempre estará a su servicio.
+      </p>
+    </div>  
+    
+    <button class="button_send" type="submit">Enviar</button>
+
+  </form>
+</section>
 
 {% endblock %}
 
@@ -43,20 +130,29 @@ Encuesta Automotores de México
 <script src="{% static 'js/widgets/widgets.js' %}"></script>
 <!-- Script para manejar el modal -->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 <script>
-  // Cuando el documento esté listo
-  $(document).ready(function () {
-    // Manejar el cierre del modal
-    $(".close").click(function () {
-      $("#errorModal").hide();
+  document.addEventListener('DOMContentLoaded', function() {
+    var trabajoCompletadoPrimeraRadios = document.querySelectorAll('input[name="trabajo_completado_primera"]');
+    var motivoTrabajoNoCompletadoPrimeraWrapper = document.getElementById('motivo_trabajo_no_completado_primera_wrapper');
+  
+    trabajoCompletadoPrimeraRadios.forEach(function(radio) {
+      radio.addEventListener('change', function() {
+        if (radio.value === 'False') {
+          motivoTrabajoNoCompletadoPrimeraWrapper.style.display = 'block';
+        } else {
+          motivoTrabajoNoCompletadoPrimeraWrapper.style.display = 'none';
+        }
+      });
+    });
+  
+    // Comprobar el valor inicial al cargar la página
+    trabajoCompletadoPrimeraRadios.forEach(function(radio) {
+      if (radio.checked && radio.value === 'False') {
+        motivoTrabajoNoCompletadoPrimeraWrapper.style.display = 'block';
+      }
     });
   });
-
-  // Función para mostrar el modal de error
-  function showErrorModal(message) {
-    $("#errorText").text(message);
-    $("#errorModal").show();
-  }
-</script>
+  </script>
 
 {% endblock %}

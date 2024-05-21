@@ -1,0 +1,55 @@
+<!-- survey_modal_amsa.html -->
+
+<style>
+    p {
+        color: rgb(12, 12, 12);
+    }
+
+    span {
+        color: rgb(188, 4, 4);
+    }
+</style>
+
+<h5 style="text-align: center; font-weight: bold;">Orden: {{ encuesta.numero_orden }}</h5>
+<p>Fecha: <span>{{ encuesta.fecha_formateada }}</span></p>
+<h5>Datos cliente</h5>
+<p>Nombre: <span>{{ encuesta.nombre_cliente }}</span></p>
+<p>Número de telefono: <span>{{ encuesta.numero_telefono }}</span></p>
+<p>Correo electronico: <span>{{ encuesta.correo_cliente }}</span></p>
+<p>Tipo de servicio que se realizó a su vehículo: <br><span>{{ encuesta.tipo_trabajo_realizado }} </span></p>
+<p>De 0 a 10 recomendó a la agencia: <span>{{ encuesta.recomendar_a_familiares_amigos }}</span></p>
+<!--Servicio-->
+<h5>Servicio</h5>
+<p>Vehículo entregado en tiempo pometido: <span>{{ encuesta.vehiculo_listo_hora_acordada_texto }}</span></p>
+<p>De 0 a 10, explicación del servicio: <span>{{ encuesta.detalle_explicaciones_asesor }}</span></p>
+
+
+<h5>Asesor</h5>
+<p>¿Se valoró el  tiempo del cliente en sus visita al taller?: <span>{{ encuesta.personal_distribuidor_valoro_tiempo_texto }}</span></p>
+<p>¿Se informó del estado del vehículo?: <span>{{ encuesta.mantener_informado_estado_vehiculo_texto }}</span></p>
+<p>Del 0 al 10 calificación general al asesor: <span>{{ encuesta.calificacion_asesor_general }}</span></p>
+<p>Del 0 al 10 calificación al generar confinza: <span>{{ encuesta.capacidad_asesor_generar_confianza }}</span></p>
+<p>Del 0 al 10 calificación al asesor para atender necesidades: <span>{{ encuesta.capacidad_asesor_entender_necesidades }}</span></p>
+<h5>Instalaciones</h5>
+<p>Del 0 al 10 Calificación a las instalaciones: <span>{{ encuesta.calificacion_instalaciones_amenidades }}</span></p>
+<h5>Entrega</h5>
+<p>¿Se le contacto al cliente despues de la entrega?: <span>{{ encuesta.llamada_cortesia_despues_entrega_vehiculo_texto }}</span></p>
+<p>El trabajo fue entregado a la primera: <span>{{ encuesta.trabajo_completado_primera_texto }}</span></p>
+{% if encuesta.trabajo_completado_primera_texto == "Si" %}
+<p> </p>
+{% else %}
+<p>Motivo(s) por las que no fue entregado a la primera: <span>{{ encuesta.motivo_trabajo_no_completado_primera }}</span></p>
+{% endif %}
+<p>De 0 a 10, limpieza del vehículo entregado: <span>{{ encuesta.limpieza_vehiculo_devolucion }}</span></p>
+<p>De 0 a 10, condiciones del vehículo en la entrega: <span>{{ encuesta.condiciones_vehiculo_despues_trabajo }}</span></p>
+<h5>Cita</h5>
+<p>¿Como se programó la vistia a servicio?: <span>{{ encuesta.como_programo_visita_servicio }}</span></p>
+<p>Agendó cita el dia/horario deseado: <span>{{ encuesta.sacar_cita_deseada_texto }}</span></p>
+<p>Del 0 al 10 calificación al programar una cita: <span>{{ encuesta.programacion_cita }}</span></p>
+
+<h5>Otros</h5>
+<p>¿Que trasporte alternativo se ofrecio? <span>{{ encuesta.apoyo_transporte_alternativo }}</span></p>
+<!--
+<br>
+<p style="font-weight: bold; text-align: center;">Calificación general al área de servicio: <span>{{ encuesta.calificacion_servicio_general }}</span></p>
+-->
